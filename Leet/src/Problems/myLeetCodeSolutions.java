@@ -7,10 +7,8 @@ import java.util.function.BinaryOperator;
 import java.util.stream.IntStream;
 
 public class myLeetCodeSolutions {
-    public static void main(String[] args) {
-        int[] input = { 6, 2, 7, 3 };
-        int first = 4;
-        System.out.println(Arrays.toString(decode_1720(input, first)));
+
+    public myLeetCodeSolutions() {
 
     }
 
@@ -22,18 +20,16 @@ public class myLeetCodeSolutions {
      * 
      * @param encoded
      * @param first
-     * @return
+     * @return decoded array
      */
-    public static int[] decode_1720(int[] encoded, int first) {
+    public int[] decode_1720(int[] encoded, int first) {
         int[] arr = new int[encoded.length + 1];
         arr[0] = first;
 
         for (int i = 0; i < arr.length - 1; i++) {
-            int temp = arr[i];
-            arr[i + 1] = temp ^ encoded[i];
+            arr[i + 1] = arr[i] ^ encoded[i];
         }
         return arr;
     }
 
-    
 }
