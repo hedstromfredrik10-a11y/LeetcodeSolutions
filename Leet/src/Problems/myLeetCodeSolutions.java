@@ -8,10 +8,6 @@ import java.util.stream.IntStream;
 
 public class myLeetCodeSolutions {
 
-    public myLeetCodeSolutions() {
-
-    }
-
     /**
      * Input: encoded = [1,2,3], first = 1
      * Output: [1,0,2,1]
@@ -30,6 +26,24 @@ public class myLeetCodeSolutions {
             arr[i + 1] = arr[i] ^ encoded[i];
         }
         return arr;
+    }
+
+    /**
+     * Example 1:
+     * 
+     * Input: nums = [90], k = 1
+     * Output: 0
+     * Explanation: There is one way to pick score(s) of one student:
+     * - [90]. The difference between the highest and lowest score is 90 - 90 = 0.
+     * The minimum possible difference is 0.
+     * 
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int minimumDifference(int[] nums, int k) {
+        
+
     }
 
 }
