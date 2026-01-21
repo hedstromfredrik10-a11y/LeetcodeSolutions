@@ -9,10 +9,17 @@ import java.util.stream.IntStream;
 public class myLeetCodeSolutions {
 
     /**
-     * Input: encoded = [1,2,3], first = 1
-     * Output: [1,0,2,1]
-     * Explanation: If arr = [1,0,2,1], then first = 1 and encoded = [1 XOR 0, 0 XOR
-     * 2, 2 XOR 1] = [1,2,3]
+     * There is a hidden integer array arr that consists of n non-negative integers.
+     * 
+     * It was encoded into another integer array encoded of length n - 1, such that
+     * encoded[i] = arr[i] XOR arr[i + 1]. For example, if arr = [1,0,2,1], then
+     * encoded = [1,2,3].
+     * 
+     * You are given the encoded array. You are also given an integer first, that is
+     * the first element of arr, i.e. arr[0].
+     * 
+     * Return the original array arr. It can be proved that the answer exists and is
+     * unique.
      * 
      * @param encoded
      * @param first
@@ -29,20 +36,35 @@ public class myLeetCodeSolutions {
     }
 
     /**
-     * Example 1:
+     * You are given a 0-indexed integer array nums, where nums[i] represents the
+     * score of the ith student. You are also given an integer k.
      * 
-     * Input: nums = [90], k = 1
-     * Output: 0
-     * Explanation: There is one way to pick score(s) of one student:
-     * - [90]. The difference between the highest and lowest score is 90 - 90 = 0.
-     * The minimum possible difference is 0.
+     * Pick the scores of any k students from the array so that the difference
+     * between the highest and the lowest of the k scores is minimized.
      * 
      * @param nums
      * @param k
-     * @return
+     * @return minimum possible difference
      */
-    public int minimumDifference(int[] nums, int k) {
-        
+    public int minimumDifference_1984(int[] nums, int k) {
+        int min = Integer.MAX_VALUE;
+        // int result = 0;
+        // Arrays.sort(nums);
+
+        if (nums.length == 1) {
+            return 0;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 0; j < nums.length; j++) {
+                int difference = nums[i] - nums[j];
+                if (difference < min && difference > 0) {
+                    min = difference;
+                }
+            }
+        }
+
+        return min;
 
     }
 
