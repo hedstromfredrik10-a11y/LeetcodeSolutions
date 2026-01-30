@@ -48,24 +48,24 @@ public class myLeetCodeSolutions {
      */
     public int minimumDifference_1984(int[] nums, int k) {
         int min = Integer.MAX_VALUE;
-        // int result = 0;
-        // Arrays.sort(nums);
 
         if (nums.length == 1) {
             return 0;
         }
 
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = 0; j < nums.length; j++) {
-                int difference = nums[i] - nums[j];
-                if (difference < min && difference > 0) {
-                    min = difference;
+        for (int i = 0, j = k; j < nums.length; i++, j++) {
+            int[] arr = Arrays.copyOfRange(nums, i, j);
+            for (int l = 0; l < arr.length; l++) {
+                for (int l2 = 0; l2 < arr.length; l2++) {
+                    int difference = arr[l] - arr[l2];
+                    if (difference < min && difference > 0) {
+                        min = difference;
+                    }
                 }
             }
-        }
 
+        }
         return min;
 
     }
-
 }
