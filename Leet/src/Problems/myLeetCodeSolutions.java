@@ -2,9 +2,12 @@ package Problems;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.BinaryOperator;
 import java.util.stream.IntStream;
+
+import javax.swing.tree.TreeNode;
 
 public class myLeetCodeSolutions {
 
@@ -68,4 +71,27 @@ public class myLeetCodeSolutions {
         return min;
 
     }
+
+    /**
+     * Given two strings s and goal, return true if and only if s can become goal
+     * after some number of shifts on s.
+     * 
+     * A shift on s consists of moving the leftmost character of s to the rightmost
+     * position.
+     * 
+     * For example, if s = "abcde", then it will be "bcdea" after one shift.
+     * 
+     * @param s
+     * @param goal
+     * @return
+     */
+    public boolean rotateString(String s, String goal) {
+        if (s.length() != goal.length()) {
+            return false;
+        }
+
+        return (s + s).contains(goal);
+
+    }
+
 }
