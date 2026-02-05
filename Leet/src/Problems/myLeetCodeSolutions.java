@@ -94,4 +94,72 @@ public class myLeetCodeSolutions {
 
     }
 
+    /**
+     * A self-dividing number is a number that is divisible by every digit it
+     * contains.
+     * 
+     * For example, 128 is a self-dividing number because 128 % 1 == 0, 128 % 2 ==
+     * 0, and 128 % 8 == 0.
+     * A self-dividing number is not allowed to contain the digit zero.
+     * 
+     * Given two integers left and right, return a list of all the self-dividing
+     * numbers in the range [left, right] (both inclusive).
+     * 
+     * @param left
+     * @param right
+     * @return
+     */
+    public List<Integer> selfDividingNumbers_728(int left, int right) {
+        List<Integer> result = new ArrayList<>();
+
+        for (int i = left; i <= right; i++) {
+            if (checkDigit(i)) {
+                result.add(i);
+            }
+        }
+
+        return result;
+    }
+
+    private boolean checkDigit(int input) {
+        String s = String.valueOf(input);
+        if (s.contains("0")) {
+            return false;
+        }
+
+        char[] arr = s.toCharArray();
+
+        for (int i = 0; i < arr.length; i++) {
+            if (input % Integer.valueOf(arr[i] - '0') != 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * You are given a string s consisting of lowercase English letters.
+     * 
+     * Return an integer denoting the maximum number of substrings you can split s
+     * into such that each substring starts with a distinct character (i.e., no two
+     * substrings start with the same character).
+     * 
+     * @param s
+     * @return
+     */
+    public int maxDistinct_3760(String s) {
+        int result = 1;
+        char[] arr = s.toCharArray();
+        Arrays.sort(arr);
+
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] != arr[i + 1]) {
+                result++;
+            }
+        }
+
+        return result;
+    }
+
 }
