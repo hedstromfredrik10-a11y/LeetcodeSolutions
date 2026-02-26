@@ -2,12 +2,8 @@ package Problems;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-import java.util.function.BinaryOperator;
 import java.util.stream.IntStream;
-
-import javax.swing.tree.TreeNode;
 
 public class myLeetCodeSolutions {
 
@@ -102,7 +98,7 @@ public class myLeetCodeSolutions {
      * 0, and 128 % 8 == 0.
      * A self-dividing number is not allowed to contain the digit zero.
      * 
-     * Given two integers left and right, return a list of all the self-dividing
+     * Given two integers left and right, return a gList of all the self-dividing
      * numbers in the range [left, right] (both inclusive).
      * 
      * @param left
@@ -160,6 +156,121 @@ public class myLeetCodeSolutions {
         }
 
         return result;
+    }
+
+    /**
+     * Given a 2D grid of size m x n and an integer k. You need to shift the grid k
+     * times.
+     * 
+     * In one shift operation:
+     * 
+     * Element at grid[i][j] moves to grid[i][j + 1].
+     * Element at grid[i][n - 1] moves to grid[i + 1][0].
+     * Element at grid[m - 1][n - 1] moves to grid[0][0].
+     * Return the 2D grid after applying shift operation k times.
+     * 
+     * @param grid
+     * @param k
+     * @return
+     */
+    public List<List<Integer>> shiftGrid_1260(int[][] grid, int k) {
+        List<Integer> gList = new ArrayList<>();
+
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid.length; j++) {
+                gList.add(grid[i][j]);
+            }
+        }
+
+        return shiftRight(gList, k);
+    }
+
+    private List<List<Integer>> shiftRight(List<Integer> input, int k) {
+        List<Integer> shiftList = new ArrayList<>();
+        shiftList.addAll(input);
+
+        for (int i = 0; i < k; i++) {
+            for (int j = 1, x = 0; j < input.size(); j++, x++) {
+                input.set(j, shiftList.get(x));
+            }
+            input.set(0, shiftList.getLast());
+            shiftList.clear();
+            shiftList.addAll(input);
+        }
+
+        List<List<Integer>> matrix = new ArrayList<>();
+
+        for (int i = 0; i < (int) Math.sqrt(input.size()); i++) {
+            ArrayList<Integer> row = new ArrayList<>();
+            for (int j = 0; j < (int) Math.sqrt(input.size()); j++) {
+                row.add(0);
+            }
+            matrix.add(row);
+        }
+
+        System.out.println(input.toString());
+
+        for (int i = 0; i < matrix.size(); i++) {
+            for (int j = 0; j < matrix.size(); j++) {
+                matrix.get(i).set(j, input.get(j));
+            }
+        }
+
+        return matrix;
+    }
+
+    public void rotate_189(int[] nums, int k) {
+        int n = nums.length;
+        k %= n;
+
+        reverse(nums, 0, n - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, n - 1);
+    }
+
+    private void reverse(int[] nums, int l, int r) {
+        while (l < r) {
+            int tmp = nums[l];
+            nums[l] = nums[r];
+            nums[r] = tmp;
+            l++;
+            r--;
+        }
+    }
+
+    /**
+     * Assume you are an awesome parent and want to give your children some cookies.
+     * But, you should give each child at most one cookie.
+     * 
+     * Each child i has a greed factor g[i], which is the minimum size of a cookie
+     * that the child will be content with; and each cookie j has a size s[j]. If
+     * s[j] >= g[i], we can assign the cookie j to the child i, and the child i will
+     * be content. Your goal is to maximize the number of your content children and
+     * output the maximum number.
+     * 
+     * @param g
+     * @param s
+     * @return
+     */
+    public int findContentChildren_455(int[] g, int[] s) {
+        Arrays.sort(s);
+        Arrays.sort(g);
+        List<Integer> listOfG = new ArrayList<>();
+        Arrays.stream(g).forEach(listOfG::add);
+        int result = 0;
+
+        for (int i = 0; i < s.length; i++) {
+            for (int j = 0; j < listOfG.size(); j++) {
+                if (s[i] >= listOfG.get(j)) {
+                    listOfG.remove(j);
+                    result++;
+                    break;
+                }
+            }
+        }
+
+        return result;
+
     }
 
 }
