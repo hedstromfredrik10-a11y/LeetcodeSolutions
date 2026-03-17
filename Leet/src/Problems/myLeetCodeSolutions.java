@@ -3,7 +3,6 @@ package Problems;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class myLeetCodeSolutions {
 
@@ -273,4 +272,78 @@ public class myLeetCodeSolutions {
 
     }
 
+    /**
+     * You are given an integer n.
+     * 
+     * Form a new integer x by concatenating all the non-zero digits of n in their
+     * original order. If there are no non-zero digits, x = 0.
+     * 
+     * Let sum be the sum of digits in x.
+     * 
+     * Return an integer representing the value of x * sum.
+     * 
+     * @param n
+     * @return
+     */
+    public long sumAndMultiply(int n) {
+        if (n == 0) {
+            return 0;
+        }
+
+        String num = String.valueOf(n);
+        int sum = 0;
+
+        num = num.replaceAll("0", "");
+
+        for (int i = 0; i < num.length(); i++) {
+            sum += num.charAt(i) - '0';
+        }
+
+        return Math.multiplyFull(sum, Integer.parseInt(num));
+
+    }
+
+    /**
+     * You are given an integer array nums.
+     * 
+     * Choose three elements a, b, and c from nums at distinct indices such that the
+     * value of the expression a + b - c is maximized.
+     * 
+     * Return an integer denoting the maximum possible value of this expression.
+     * 
+     * @param nums
+     * @return
+     */
+    public int maximizeExpressionOfThree(int[] nums) {
+        Arrays.sort(nums);
+
+        return nums[nums.length - 1] + nums[nums.length - 2] - nums[0];
+    }
+
+}
+
+// 1114
+class Foo {
+
+    public Foo() {
+
+    }
+
+    public void first(Runnable printFirst) throws InterruptedException {
+
+        // printFirst.run() outputs "first". Do not change or remove this line.
+        printFirst.run();
+    }
+
+    public void second(Runnable printSecond) throws InterruptedException {
+
+        // printSecond.run() outputs "second". Do not change or remove this line.
+        printSecond.run();
+    }
+
+    public void third(Runnable printThird) throws InterruptedException {
+
+        // printThird.run() outputs "third". Do not change or remove this line.
+        printThird.run();
+    }
 }
