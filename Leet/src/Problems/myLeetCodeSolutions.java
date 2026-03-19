@@ -105,15 +105,15 @@ public class myLeetCodeSolutions {
      * @return
      */
     public List<Integer> selfDividingNumbers_728(int left, int right) {
-        List<Integer> result = new ArrayList<>();
+        List<Integer> counter = new ArrayList<>();
 
         for (int i = left; i <= right; i++) {
             if (checkDigit(i)) {
-                result.add(i);
+                counter.add(i);
             }
         }
 
-        return result;
+        return counter;
     }
 
     private boolean checkDigit(int input) {
@@ -144,17 +144,17 @@ public class myLeetCodeSolutions {
      * @return
      */
     public int maxDistinct_3760(String s) {
-        int result = 1;
+        int counter = 1;
         char[] arr = s.toCharArray();
         Arrays.sort(arr);
 
         for (int i = 0; i < arr.length - 1; i++) {
             if (arr[i] != arr[i + 1]) {
-                result++;
+                counter++;
             }
         }
 
-        return result;
+        return counter;
     }
 
     /**
@@ -256,19 +256,19 @@ public class myLeetCodeSolutions {
         Arrays.sort(g);
         List<Integer> listOfG = new ArrayList<>();
         Arrays.stream(g).forEach(listOfG::add);
-        int result = 0;
+        int counter = 0;
 
         for (int i = 0; i < s.length; i++) {
             for (int j = 0; j < listOfG.size(); j++) {
                 if (s[i] >= listOfG.get(j)) {
                     listOfG.remove(j);
-                    result++;
+                    counter++;
                     break;
                 }
             }
         }
 
-        return result;
+        return counter;
 
     }
 
@@ -320,30 +320,49 @@ public class myLeetCodeSolutions {
         return nums[nums.length - 1] + nums[nums.length - 2] - nums[0];
     }
 
-}
+    /**
+     * You are given a string s consisting only of digits. A valid pair is defined
+     * as two adjacent digits in s such that:
+     * 
+     * The first digit is not equal to the second.
+     * Each digit in the pair appears in s exactly as many times as its numeric
+     * value.
+     * Return the first valid pair found in the string s when traversing from left
+     * to right. If no valid pair exists, return an empty string.
+     * 
+     * @param s
+     * @return
+     */
+    public String findValidPair_3438(String s) {
+        if (s.isEmpty() || s.isBlank()) {
+            return "";
+        }
 
-// 1114
-class Foo {
+        StringBuilder builder = new StringBuilder();
 
-    public Foo() {
+        for (int i = 0; i < s.length(); i++) {
+            if (builder.toString().contains(Character.toString(s.charAt(i)))) {
+                continue;
+            }
 
+            if (countOccurences(s.charAt(i) - '0', s) == s.charAt(i) - '0') {
+                builder.append(s.charAt(i));
+            }
+        }
+
+        return builder.toString();
     }
 
-    public void first(Runnable printFirst) throws InterruptedException {
+    private int countOccurences(int input, String s) {
+        int counter = 0;
 
-        // printFirst.run() outputs "first". Do not change or remove this line.
-        printFirst.run();
+        for (int i = 0; i < s.length(); i++) {
+            if (input == s.charAt(i) - '0') {
+                counter++;
+            }
+        }
+
+        return counter;
     }
 
-    public void second(Runnable printSecond) throws InterruptedException {
-
-        // printSecond.run() outputs "second". Do not change or remove this line.
-        printSecond.run();
-    }
-
-    public void third(Runnable printThird) throws InterruptedException {
-
-        // printThird.run() outputs "third". Do not change or remove this line.
-        printThird.run();
-    }
 }

@@ -6,6 +6,6 @@ public class mainClass {
 
         int[] s = { 1, 4, 2, 5 };
 
-        System.out.println(solutions.maximizeExpressionOfThree(s));
+        System.out.println(solutions.findValidPair_3438("333655555777"));
     }
 }
