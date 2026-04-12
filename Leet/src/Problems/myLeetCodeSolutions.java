@@ -105,15 +105,15 @@ public class myLeetCodeSolutions {
      * @return
      */
     public List<Integer> selfDividingNumbers_728(int left, int right) {
-        List<Integer> counter = new ArrayList<>();
+        List<Integer> nbrOfWritableWords = new ArrayList<>();
 
         for (int i = left; i <= right; i++) {
             if (checkDigit(i)) {
-                counter.add(i);
+                nbrOfWritableWords.add(i);
             }
         }
 
-        return counter;
+        return nbrOfWritableWords;
     }
 
     private boolean checkDigit(int input) {
@@ -144,17 +144,17 @@ public class myLeetCodeSolutions {
      * @return
      */
     public int maxDistinct_3760(String s) {
-        int counter = 1;
+        int nbrOfWritableWords = 1;
         char[] arr = s.toCharArray();
         Arrays.sort(arr);
 
         for (int i = 0; i < arr.length - 1; i++) {
             if (arr[i] != arr[i + 1]) {
-                counter++;
+                nbrOfWritableWords++;
             }
         }
 
-        return counter;
+        return nbrOfWritableWords;
     }
 
     /**
@@ -256,19 +256,19 @@ public class myLeetCodeSolutions {
         Arrays.sort(g);
         List<Integer> listOfG = new ArrayList<>();
         Arrays.stream(g).forEach(listOfG::add);
-        int counter = 0;
+        int nbrOfWritableWords = 0;
 
         for (int i = 0; i < s.length; i++) {
             for (int j = 0; j < listOfG.size(); j++) {
                 if (s[i] >= listOfG.get(j)) {
                     listOfG.remove(j);
-                    counter++;
+                    nbrOfWritableWords++;
                     break;
                 }
             }
         }
 
-        return counter;
+        return nbrOfWritableWords;
 
     }
 
@@ -316,7 +316,6 @@ public class myLeetCodeSolutions {
      */
     public int maximizeExpressionOfThree(int[] nums) {
         Arrays.sort(nums);
-
         return nums[nums.length - 1] + nums[nums.length - 2] - nums[0];
     }
 
@@ -333,12 +332,13 @@ public class myLeetCodeSolutions {
      * @param s
      * @return
      */
-    public String findValidPair_3438(String s) {
+    public String findValidPair_3438_X(String s) {
         if (s.isEmpty() || s.isBlank()) {
             return "";
         }
 
         StringBuilder builder = new StringBuilder();
+        int countMethodCalls = 0;
 
         for (int i = 0; i < s.length(); i++) {
             if (builder.toString().contains(Character.toString(s.charAt(i)))) {
@@ -347,22 +347,106 @@ public class myLeetCodeSolutions {
 
             if (countOccurences(s.charAt(i) - '0', s) == s.charAt(i) - '0') {
                 builder.append(s.charAt(i));
+                countMethodCalls++;
             }
         }
 
-        return builder.toString();
+        return countMethodCalls == 1 ? ""
+                : s.contains(builder.toString()) || s.contains(builder.reverse().toString()) ? builder.toString() : "";
+
     }
 
     private int countOccurences(int input, String s) {
-        int counter = 0;
+
+        int nbrOfWritableWords = 0;
 
         for (int i = 0; i < s.length(); i++) {
             if (input == s.charAt(i) - '0') {
-                counter++;
+                nbrOfWritableWords++;
             }
         }
 
-        return counter;
+        return nbrOfWritableWords;
+    }
+
+    /**
+     * Given a 0-indexed integer array nums, return true if it can be made strictly
+     * increasing after removing exactly one element, or false otherwise. If the
+     * array is already strictly increasing, return true.
+     * 
+     * The array nums is strictly increasing if nums[i - 1] < nums[i] for each index
+     * (1 <= i < nums.length).
+     * 
+     * @param nums
+     * @return
+     */
+    public boolean canBeIncreasing(int[] nums) {
+        if (checkStrictIncreaasing(nums)) {
+            return true;
+        }
+
+        int[] arr = new int[nums.length - 1];
+        int nbrOfWritableWords = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int tracker = i;
+            for (int j = 0, x = 0; j < nums.length; j++) {
+                if (j == tracker) {
+                    continue;
+                }
+                arr[x++] = nums[j];
+            }
+            if (checkStrictIncreaasing(arr)) {
+                nbrOfWritableWords++;
+                if (nbrOfWritableWords > 0) {
+                    return true;
+                }
+            }
+
+        }
+
+        return false;
+
+    }
+
+    private boolean checkStrictIncreaasing(int[] nums) {
+        for (int i = 0, j = 1; i < nums.length - 1; i++, j++) {
+            if (nums[i] >= nums[j]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public List<Integer> targetIndices(int[] nums, int target) {
+        List<Integer> result = new ArrayList<>();
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == target) {
+                result.add(i);
+            }
+        }
+        return result;
+    }
+
+    public int canBeTypedWords(String text, String brokenLetters) {
+        boolean brokenLetterFoundInWord = false;
+        int nbrOfWritableWords = 0;
+
+        for (String s : text.toLowerCase().split(" ")) {
+            for (char c : brokenLetters.toLowerCase().toCharArray()) {
+                if (s.contains(Character.toString(c))) {
+                    brokenLetterFoundInWord = true;
+                    break;
+                }
+            }
+            if (!brokenLetterFoundInWord) {
+                nbrOfWritableWords++;
+            }
+            brokenLetterFoundInWord = false;
+        }
+
+        return nbrOfWritableWords;
     }
 
 }
