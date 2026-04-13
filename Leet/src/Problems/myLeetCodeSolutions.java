@@ -449,4 +449,99 @@ public class myLeetCodeSolutions {
         return nbrOfWritableWords;
     }
 
+    /**
+     * An array is monotonic if it is either monotone increasing or monotone
+     * decreasing.
+     * 
+     * An array nums is monotone increasing if for all i <= j, nums[i] <= nums[j].
+     * An array nums is monotone decreasing if for all i <= j, nums[i] >= nums[j].
+     * 
+     * Given an integer array nums, return true if the given array is monotonic, or
+     * false otherwise.
+     * 
+     * @param nums
+     * @return
+     */
+    public boolean isMonotonic(int[] nums) {
+        if (nums[0] > nums[nums.length - 1]) {
+            return isMonotonicReverse(nums);
+        }
+
+        for (int i = 0, j = 1; i < nums.length - 1; i++, j++) {
+            if (!(nums[i] <= nums[j])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean isMonotonicReverse(int[] nums) {
+        for (int i = nums.length - 2, j = nums.length - 1; i >= 0; i--, j--) {
+            if (!(nums[i] >= nums[j])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * You are given a 0-indexed integer array nums, and an integer k.
+     * 
+     * In one operation, you can remove one occurrence of the smallest element of
+     * nums.
+     * 
+     * Return the minimum number of operations needed so that all elements of the
+     * array are greater than or equal to k.
+     * 
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int minOperations(int[] nums, int k) {
+        int counter = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] < k) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    /**
+     * Given an integer array nums, return the largest perimeter of a triangle with
+     * a non-zero area, formed from three of these lengths. If it is impossible to
+     * form any triangle of a non-zero area, return 0.
+     * Rule: a + b > c
+     * 
+     * @param nums
+     * @return
+     */
+    public int largestPerimeter(int[] nums) {
+        Arrays.sort(nums);
+
+        int perimeter = 0;
+
+        for (int i = nums.length - 1; i >= 0; i--) {
+            if ((i - 2) < 0) {
+                return 0;
+            } else if (testTriangle(nums[i - 2], nums[i - 1], nums[i])) {
+                perimeter = nums[i - 2] + nums[i - 1] + nums[i];
+                break;
+            }
+        }
+
+        return perimeter;
+    }
+
+    private boolean testTriangle(int a, int b, int c) {
+        if ((a + b) > c) {
+            return true;
+        }
+
+        return false;
+    }
+
 }
