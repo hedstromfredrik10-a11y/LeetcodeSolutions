@@ -7,7 +7,7 @@ public class mainClass {
         int[] s = { 1, 2, 1, 10 };
 
         String text = "Leet code";
-        String brokenLetters = "e";
+        String brokenLetters =  "e";
 
         System.out.println(solutions.largestPerimeter(s));
 

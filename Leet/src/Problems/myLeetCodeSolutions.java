@@ -544,4 +544,24 @@ public class myLeetCodeSolutions {
         return false;
     }
 
+    public int ExpectedMinutesInOven() {
+        return 40;
+    }
+
+    public int RemainingMinutesInOven(int minutesLeft) {
+        return ExpectedMinutesInOven() - minutesLeft;
+    }
+
+    private int big;
+    private int medium;
+    private int small;
+
+    public ParkingSystem(int big, int medium, int small) {
+
+    }
+
+    public boolean addCar(int carType) {
+
+    }
+
 }
