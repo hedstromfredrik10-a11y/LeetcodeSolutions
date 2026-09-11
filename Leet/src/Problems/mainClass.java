@@ -1,15 +1,21 @@
 package Problems;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class mainClass {
     public static void main(String[] args) {
         myLeetCodeSolutions solutions = new myLeetCodeSolutions();
 
-        int[] s = { 1, 2, 1, 10 };
+        int[] s = { 1, 2, 10 };
 
-        String text = "Leet code";
-        String brokenLetters =  "e";
+        List<Integer> list = new ArrayList<>();
 
-        System.out.println(solutions.largestPerimeter(s));
+        for (int i : s) {
+            list.add(i);
+        }
+
+        System.out.println(solutions.containsUnique(list));
 
     }
 }

@@ -2,6 +2,7 @@ package Problems;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public class myLeetCodeSolutions {
@@ -544,24 +545,14 @@ public class myLeetCodeSolutions {
         return false;
     }
 
-    public int ExpectedMinutesInOven() {
-        return 40;
-    }
+    public boolean containsUnique(List<Integer> list) {
+        HashSet<Integer> set = new HashSet<>();
 
-    public int RemainingMinutesInOven(int minutesLeft) {
-        return ExpectedMinutesInOven() - minutesLeft;
-    }
+        for (Integer integer : list) {
+            set.add(integer);
+        }
 
-    private int big;
-    private int medium;
-    private int small;
-
-    public ParkingSystem(int big, int medium, int small) {
-
-    }
-
-    public boolean addCar(int carType) {
-
+        return set.size() != list.size() ? true : false;
     }
 
 }
